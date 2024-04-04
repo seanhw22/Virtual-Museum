@@ -17,24 +17,13 @@
 
 <body>
   <div class="container">
-    <h1>Login</h1>
-    <% if (messages.error) { %>
-      <div class="alert alert-danger" role="alert">
-        <%= messages.error %>
-      </div>
-      <% } %>
-        <% if (messages.success) { %>
-          <div class="alert alert-success" role="alert">
-            <%= messages.success %>
-          </div>
-          <% } %>
+            <h1>Login</h1>
             <!-- login -->
             <form action="/login" method="POST">
 
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required name="email">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="exampleInputUsername1" class="form-label">Username</label>
+                <input type="username" class="form-control" id="username" aria-describedby="usernameHelp" required name="username">
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>

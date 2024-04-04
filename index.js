@@ -1,42 +1,51 @@
+const express = require("express");
+const app = express();
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+const morgan = require('morgan')
+const users = require('./models/users.js')
+const passport = require('passport')
+const session = require('express-session');
+const path = require('path');
+const methodOverride = require('method-override');
+const User = users;
+
+//mongo
+dotenv.config()
+const PORT = process.env.PORT || 3000
+const MONGO_URL = process.env.MONGO_URL
+
+app.use(express.json())
+
+app.use(morgan('dev'))
+
+mongoose.connect(MONGO_URL)
+    .then(() => console.log(`MongoDB connected ${MONGO_URL}`))
+    .catch(err => console.log(err))
+
+//init passport and others
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
 }
 
-const express = require('express');
-const app = express();
-const path = require('path');
-const bcrypt = require('bcrypt');
-const port = 3000;
-
-const methodOverride = require('method-override');
-app.use (methodOverride('_method'));
-
-
-const flash = require('express-flash');
-const session = require('express-session');
-
-const passport = require('passport');
-
-const initializePassport = require('./passport-config');
-initializePassport(
-    passport,
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
-   
-);
-
-const users = [];
-
 app.use(express.urlencoded({ extended: false }));
+
+app.use (methodOverride('_method'));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }));
-app.use(passport.initialize());
+app.use(passport.initialize()); 
 app.use(passport.session());
-app.use(flash());
+
+
+const initializePassport = require('./passport-config');
+initializePassport(
+    passport,
+    username => User.find(user => user.username === username)
+);
 
 //ejs
 app.set('view engine', 'ejs');
@@ -46,13 +55,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static("public"));
 
 const mahasiswa = [
-    {name : "Sean", email : "sean@sean"},
-    {name : "Aldo", email : "aldo@aldo"},
-    {name : "Paulin", email : "paulin@paulin"}
+    {name : "Sean", email : "sean.535220019@stu.untar.ac.id"},
+    {name : "Aldo", email : "valentino.535220040@stu.untar.ac.id"},
+    {name : "Paulin", email : "paulina.535220048@stu.untar.ac.id"}
 ]
 
-app.get('/',checkAuthenticated, (req, res) => {
-    res.render('index', { nama: req.user.name, title : "Museum Virtual", mahasiswa : mahasiswa});
+app.get('/', checkAuthenticated, (req, res) => {
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa})
 });
 
 //login
@@ -73,22 +82,20 @@ app.post('/login', passport.authenticate('local', {
   }))
 
 //post register
-app.post('/register', async (req, res) => {
-   try   {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    users.push({
-        id: Date.now().toString(),
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword
+app.post('/register', function(req, res, next) {
+    User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err) {
+      if (err) {
+        console.log('Error while registering user! Error : ', err);
+        return next(err);
+      }
+      console.log('User registered!');
+  
+      res.redirect('/login');
     });
-    res.redirect('/login');
-   }    catch    {
-    res.redirect('/register');
-   }
-   console.log(users);
-});
+  });
 
+
+//check authentication
 function checkAuthenticated(req,res,next){
     if(req.isAuthenticated()){
         return next();
@@ -103,6 +110,7 @@ function checkNotAuthenticated(req,res,next){
     next();
 }
 
+//logout
 app.delete('/logout', (req, res, next) => {
     req.logOut(function
     (err) {
@@ -113,6 +121,6 @@ app.delete('/logout', (req, res, next) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
-});
+app.listen(PORT, () => {
+    console.log(`Webserver app listening on port ${PORT}`);
+})
