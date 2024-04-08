@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="tugas.css">
-        <title><%= title %></title>
-    </head>
-
-    <body>
         <div id="main-container" style="display: none;">
             <header>
                 <h1>Virtual Museum</h1>
@@ -33,14 +23,3 @@
                 <% }) %>
                 <button onclick="closeAboutUs()">Go Back</button>
         </div>
-    
-
-        <form action="/logout?_method=DELETE" method="POST">
-            <button type="submit">Log Out</button>
-        </form>
-
-        <script src="tugas.js"></script>
-        
-    </body>
-    
-</html>

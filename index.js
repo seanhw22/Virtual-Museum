@@ -8,6 +8,7 @@ const passport = require('passport')
 const session = require('express-session');
 const path = require('path');
 const methodOverride = require('method-override');
+const expressLayouts = require("express-ejs-layouts");
 const User = users;
 
 //mongo
@@ -42,6 +43,7 @@ app.use(passport.session());
 
 
 const initializePassport = require('./passport-config');
+
 initializePassport(
     passport,
     username => User.find(user => user.username === username)
@@ -54,14 +56,26 @@ app.set('views', path.join(__dirname, 'views'));
 //static
 app.use(express.static("public"));
 
+//layouts
+app.use(expressLayouts);
+
 const mahasiswa = [
     {name : "Sean", email : "sean.535220019@stu.untar.ac.id"},
     {name : "Aldo", email : "valentino.535220040@stu.untar.ac.id"},
     {name : "Paulin", email : "paulina.535220048@stu.untar.ac.id"}
 ]
 
-app.get('/', checkAuthenticated, (req, res) => {
-    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa})
+app.use(function(req, res, next) {
+    res.locals.loggedIn = req.loggedIn;
+    next();
+});
+
+app.get('/logged-in', checkAuthenticated, (req, res) => {
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : true})
+});
+
+app.get('/', checkNotAuthenticated, (req, res) => {
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : false})
 });
 
 //login
@@ -76,7 +90,7 @@ app.get('/register', checkNotAuthenticated,(req, res) => {
 
 //post login
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/logged-in',
     failureRedirect: '/login',
     failureFlash: true
   }))
@@ -100,12 +114,12 @@ function checkAuthenticated(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect('/login');
+    res.redirect('/');
 }
 
 function checkNotAuthenticated(req,res,next){
     if(req.isAuthenticated()){
-        return res.redirect('/');
+        return res.redirect('/logged-in');
     }
     next();
 }
