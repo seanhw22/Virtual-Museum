@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function generateArtifacts() {
-    var artifactDataString = document.getElementById("artifacts").getAttribute("data-value");
+    var artifactDataString = document.getElementById("artifact-container").getAttribute("data-value");
     var artifactData = JSON.parse(artifactDataString);
     for (var i = 0, len = artifactData.length; i < len; i++) {
         delete artifactData[i].entryDate;
