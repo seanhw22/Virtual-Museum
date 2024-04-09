@@ -1,22 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const mainContainer = document.getElementById("main-container");
-
-    showMainContainer();
-
-    function showMainContainer() {
-        mainContainer.style.display = "block";
-        generateArtifacts();
-    }
+    generateArtifacts();
 });
 
-window.onload = function() {
-    showMainContainer();
-};
-
 function generateArtifacts() {
+    var artifactDataString = document.getElementById("artifacts").getAttribute("data-value");
+    var artifactData = JSON.parse(artifactDataString);
+    for (var i = 0, len = artifactData.length; i < len; i++) {
+        delete artifactData[i].entryDate;
+        delete artifactData[i].__v;
+        delete artifactData[i]._id;
+      }
+
     const gallery = document.getElementById("artifact-container");
 
-    const artifacts = [
+    var artifacts = [
         {
             name: "Monas",
             image: "image005-300x225.jpg",
@@ -30,13 +27,15 @@ function generateArtifacts() {
             article: "Sejarah Museum Wayang di Kota Tua<br>Dilansir situs Asosiasi Museum Indonesia (AMI), bangunan Museum Wayang dulunya merupakan sebuah gereja tua yang didirikan oleh VOC pada tahun 1640 dengan nama 'de oude Hollandsche Kerk'. Kemudian, gedung tersebut berfungsi sebagai tempat peribadatan penduduk sipil dan tentara Belanda yang tinggal di Batavia, Jakarta sampai tahun 1732.<br><br>Lalu, pada tahun 1733, gereja tersebut berubah nama menjadi de nieuwe Hollandsche Kerk yang berdiri sampai tahun 1808. Kemudian, bangunan tersebut hancur akibat gempa bumi.<br><br>Setelah dibedah, bangunan itu diserahkan kepada Stichting Oud Batavia untuk dijadikan museum yang diberi nama de Oude Bataviasche Museum atau Museum Batavia Lama.<br><br>Dua belas tahun setelah proklamasi kemerdekaan 1945, tepatnya pada tahun 1957, pemerintah menyerahkan gedung Museum Batavia Lama kepada Lembaga Kebudayaan Indonesia. Nama bangunan itu Museum Jakarta Lama, yang kemudian berubah menjadi Museum Jakarta pada 1 Agustus 1960.<br><br>Penetapan Museum Wayang<br>Pada tahun 1968, Museum Jakarta kemudian diserahkan kepada Pemerintah Provinsi DKI Jakarta. Lalu, Museum Jakarta berubah menjadi Museum Wayang yang diresmikan pada tanggal 13 Agustus 1975 oleh Ali Sadikin, Gubernur DKI Jakarta pada waktu itu.<br><br>Lokasi Museum Wayang<br>Mengutip dari akun Instagram Museum Wayang, gedung museum itu berlokasi di Jl. Pintu Besar Utara No.27 Jakarta Barat. Museum ini berada di kawasan wisata Kota Tua Jakarta.<br><br>Sumber : <a href='https://news.detik.com/berita/d-6381570/sejarah-museum-wayang-di-jakarta-lokasi-dan-jam-buka'>https://news.detik.com/berita/d-6381570/sejarah-museum-wayang-di-jakarta-lokasi-dan-jam-buka</a>"
         },
     ];
+    
+    artifactData = artifactData.concat(artifacts);
 
-    artifacts.forEach((artifact) => {
+    artifactData.forEach((artifact) => {
         const artifactElement = document.createElement("div");
         artifactElement.classList.add("artifact");
 
         artifactElement.addEventListener("click", function () {
-            showArtifactDetails(artifact);
+            showArtifactDetails(JSON.stringify(artifact));
         });
 
         const imageElement = document.createElement("img");
@@ -52,7 +51,8 @@ function generateArtifacts() {
     });
 }
 
-function showArtifactDetails(artifact) {
+function showArtifactDetails(artifactString) {
+    const artifact = JSON.parse(artifactString);
     const detailsContainer = document.getElementById("artifact-details");
     detailsContainer.innerHTML = `
         <h2>${artifact.name}</h2>

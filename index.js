@@ -9,7 +9,11 @@ const session = require('express-session');
 const path = require('path');
 const methodOverride = require('method-override');
 const expressLayouts = require("express-ejs-layouts");
+const artifactRoute = require('./routes/add-artifacts.js')
+const artifacts = require('./models/artifacts.js');
 const User = users;
+const Artifact = artifacts;
+var artifact;
 
 //mongo
 dotenv.config()
@@ -29,7 +33,7 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
 }
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use (methodOverride('_method'));
 
@@ -70,12 +74,14 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/logged-in', checkAuthenticated, (req, res) => {
-    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : true})
+app.get('/logged-in', checkAuthenticated, async(req, res) => {
+    const artifactResult = (await Artifact.find().lean());
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : true, data : artifactResult})
 });
 
-app.get('/', checkNotAuthenticated, (req, res) => {
-    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : false})
+app.get('/', checkNotAuthenticated, async(req, res) => {
+    const artifactResult = (await Artifact.find().lean());
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : false, data : artifactResult})
 });
 
 //login
@@ -133,6 +139,13 @@ app.delete('/logout', (req, res, next) => {
         }
         res.redirect('/login');
     });
+});
+
+// artifact
+app.use('/artifact', artifactRoute);
+
+app.get('/add-artifact', checkAuthenticated, (req, res) => {
+    res.render("add-artifact.ejs", {layouts: 'layout'})
 });
 
 app.listen(PORT, () => {
