@@ -14,12 +14,11 @@
       <%- body %>
 
       <% if (loggedIn == true) { %>
-        <form action="/add-artifact?_method=GET" method="POST">
-          <button type="submit">Add Artifact</button>
-        </form>
+        <center><a href="/artifact-list">Add & Modify Artifacts</a>
         <form action="/logout?_method=DELETE" method="POST">
           <button type="submit">Log Out</button>
         </form>
+      </center>
       <% } %>
       <% if (loggedIn == false) { %>
         <form action="/login?_method=GET" method="POST">

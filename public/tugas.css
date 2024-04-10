@@ -106,6 +106,7 @@ button:hover {
 
 #artifact-details {
     margin: 25px 50px;
+    white-space: wrap;
 }
 
 #artifact-details h2 {

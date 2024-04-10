@@ -8,6 +8,7 @@ Anggota Kelompok 14 :
     - Paulina Agustina / 535220048
 
 To do list : 
-crud with mongo for article
+admin user & admin check
+link for article source as a new variable
 redesign website
 add quiz / extra features

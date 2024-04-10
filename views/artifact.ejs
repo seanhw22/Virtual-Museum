@@ -1,0 +1,33 @@
+    <form action="/q" method="POST" class="search-form" id="searchForm">
+        <div>
+            <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search != '') { %> value="<%= search %>" <% } %>>
+            <div class="input-group-append"><button class="btn btn-primary">Search</button></div>
+        </div>
+    </form>
+    <form action="/add-artifact?_method=GET" method="POST">
+      <button type="submit">Add Artifact</button>
+    </form>
+
+    <center>
+    <% if (message != '') { %>
+      <br>
+      <div class="alert alert-danger" role="alert">
+        <%= message %>
+      </div>
+      <br>
+    <% } %>
+    </center>
+
+    <% if (data != null) { data.forEach( item => { %>
+        <div class="artifact">
+          <a href="<%= item.name %>"><img src="<%= item.image %>"></a>
+            <div class="artifact-info">
+              <h3><%= item.name %></h3>
+              <a href="/artifact/<%= item._id %>">Edit</a> &nbsp; 
+              <a href="/artifact/delete/<%= item._id %>" class="red" onclick="return confirm('Are you sure you wish to delete this?');">Delete</a>
+            </div>
+        </div>
+    <% }); } %>
+    <form action="/?_method=GET" method="POST">
+      <button type="submit">Go back to homepage</button>
+    </form>

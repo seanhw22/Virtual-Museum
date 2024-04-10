@@ -9,11 +9,10 @@ const session = require('express-session');
 const path = require('path');
 const methodOverride = require('method-override');
 const expressLayouts = require("express-ejs-layouts");
-const artifactRoute = require('./routes/add-artifacts.js')
+const artifactRoute = require('./routes/artifact.js')
 const artifacts = require('./models/artifacts.js');
 const User = users;
 const Artifact = artifacts;
-var artifact;
 
 //mongo
 dotenv.config()
@@ -63,6 +62,7 @@ app.use(express.static("public"));
 //layouts
 app.use(expressLayouts);
 
+// -----
 const mahasiswa = [
     {name : "Sean", email : "sean.535220019@stu.untar.ac.id"},
     {name : "Aldo", email : "valentino.535220040@stu.untar.ac.id"},
@@ -74,20 +74,42 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/logged-in', checkAuthenticated, async(req, res) => {
+// -----
+
+// homepage
+app.get('/', async(req, res) => {
     const artifactResult = (await Artifact.find().lean());
-    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : true, data : artifactResult})
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : req.isAuthenticated(), data : artifactResult, search:'', message:''})
 });
 
-app.get('/', checkNotAuthenticated, async(req, res) => {
+// search
+app.post('/search', async(req, res) => {
     const artifactResult = (await Artifact.find().lean());
-    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts : 'layout', loggedIn : false, data : artifactResult})
+    let q = req.body.searchInput;
+    let artifactData = null;
+    let qry = {name:{$regex:'^' + q, $options:'i'}};
+    let message = '';
+  
+    if (q != null) {
+        let artifactSearch = await Artifact.find(qry).then( (data) => {
+            artifactData = data;
+            if(artifactData.length == 0){
+                artifactData = artifactResult;
+                message = 'No results.'
+            }
+        });
+    } else {
+        q = 'Search';
+        artifactData = artifactResult;
+    }
+  
+    res.render("index.ejs", {title : "Museum Virtual", mahasiswa : mahasiswa, layouts: 'layout', loggedIn : req.isAuthenticated(), data : artifactData, search:q, message:message});
 });
 
 //login
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login.ejs')
-  })
+});
 
 //register
 app.get('/register', checkNotAuthenticated,(req, res) => {
@@ -96,10 +118,10 @@ app.get('/register', checkNotAuthenticated,(req, res) => {
 
 //post login
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/logged-in',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
-  }))
+}));
 
 //post register
 app.post('/register', function(req, res, next) {
@@ -112,8 +134,7 @@ app.post('/register', function(req, res, next) {
   
       res.redirect('/login');
     });
-  });
-
+});
 
 //check authentication
 function checkAuthenticated(req,res,next){
@@ -121,11 +142,11 @@ function checkAuthenticated(req,res,next){
         return next();
     }
     res.redirect('/');
-}
+};
 
 function checkNotAuthenticated(req,res,next){
     if(req.isAuthenticated()){
-        return res.redirect('/logged-in');
+        return res.redirect('/');
     }
     next();
 }
@@ -137,7 +158,7 @@ app.delete('/logout', (req, res, next) => {
         if (err) {
             return next(err);
         }
-        res.redirect('/login');
+        res.redirect('/');
     });
 });
 
@@ -148,6 +169,36 @@ app.get('/add-artifact', checkAuthenticated, (req, res) => {
     res.render("add-artifact.ejs", {layouts: 'layout'})
 });
 
+app.get('/artifact-list', checkAuthenticated, async(req, res) => {
+    const artifactResult = (await Artifact.find().lean());
+    res.render("artifact.ejs", {layouts: 'layout', data : artifactResult, search:'', message:''})
+})
+
+// search for artifact in modify artifacts
+app.post('/q', checkAuthenticated, async(req, res) => {
+    const artifactResult = (await Artifact.find().lean());
+    let q = req.body.searchInput;
+    let artifactData = null;
+    let qry = {name:{$regex:'^' + q, $options:'i'}};
+    let message = '';
+  
+    if (q != null) {
+        let artifactSearch = await Artifact.find(qry).then( (data) => {
+            artifactData = data;
+            if(artifactData.length == 0){
+                artifactData = artifactResult;
+                message = 'No results.'
+            }
+        });
+    } else {
+        q = 'Search';
+        artifactData = artifactResult;
+    }
+  
+    res.render("artifact.ejs", {layouts: 'layout', data : artifactData, search:q, message:message});
+});
+
+// port
 app.listen(PORT, () => {
     console.log(`Webserver app listening on port ${PORT}`);
 })

@@ -2,11 +2,26 @@
             <header>
                 <h1>Virtual Museum</h1>
             </header>
-
             <main id="gallery">
                 <div id="welcome-message">
                     <h2>Selamat datang di Museum Virtual!</h2>
                 </div>
+                <form action="/search" method="POST" class="search-form" id="searchForm">
+                    <div>
+                        <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search != '') { %> value="<%= search %>" <% } %>>
+                        <div class="input-group-append"><button class="btn btn-primary">Search</button></div>
+                    </div>
+                </form>
+            
+                <center>
+                <% if (message != '') { %>
+                  <br>
+                  <div class="alert alert-danger" role="alert">
+                    <%= message %>
+                  </div>
+                  <br>
+                <% } %>
+                </center>
                 <div id="artifact-container" data-value="<%= JSON.stringify(data) %>"></div>
                 <button onclick="showAboutUs()">About Us</button>
             </main>
