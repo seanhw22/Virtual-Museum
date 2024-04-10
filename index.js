@@ -73,7 +73,6 @@ app.use(function(req, res, next) {
     res.locals.loggedIn = req.loggedIn;
     next();
 });
-
 // -----
 
 // homepage
