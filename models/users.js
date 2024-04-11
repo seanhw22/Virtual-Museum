@@ -6,12 +6,17 @@ let usersSchema = new schema({
     username: {
         type: String,
         required: true
-      },
+    },
     email: {
         type: String,
         required: true,
         unique: true
-      },
+    },
+    admin: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     entryDate: {type:Date, default:Date.now}
 });
 

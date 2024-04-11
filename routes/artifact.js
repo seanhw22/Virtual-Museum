@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const Artifact = require('../models/artifacts');
-const artifacts = require('../models/artifacts');
 
 router.use(express.static("public"));
 
@@ -14,7 +13,7 @@ function insert_br(text)
 }
 
 // create new artifact
-router.post('/new', checkAuthenticated, async (req, res) => {
+router.post('/new', checkAdmin, async (req, res) => {
     let artifactName = req.body.artifactName;
     let artifactImage = req.body.artifactImage;
     let artifactDescription = req.body.artifactDescription;
@@ -42,7 +41,7 @@ router.post('/new', checkAuthenticated, async (req, res) => {
 });
 
 // delete artifact
-router.get('/delete/:id', checkAuthenticated, async(req, res) => {
+router.get('/delete/:id', checkAdmin, async(req, res) => {
 
     let artifactId = req.params.id;
     let qry = {_id:artifactId};
@@ -51,7 +50,7 @@ router.get('/delete/:id', checkAuthenticated, async(req, res) => {
 });
 
 // get artifact
-router.get('/:id', checkAuthenticated, async(req, res) => {
+router.get('/:id', checkAdmin, async(req, res) => {
 
     let id = req.params.id;
     let err = '';
@@ -68,7 +67,7 @@ router.get('/:id', checkAuthenticated, async(req, res) => {
 });
 
 // update artifact
-router.post('/save', checkAuthenticated, async(req, res) => {
+router.post('/save', checkAdmin, async(req, res) => {
     let artifactId = req.body.artifactId;
     let artifactName = req.body.artifactName;
     let artifactImage = req.body.artifactImage;
@@ -96,12 +95,12 @@ router.post('/save', checkAuthenticated, async(req, res) => {
     res.redirect('/');
 });
 
-//check authentication
-function checkAuthenticated(req,res,next){
-    if(req.isAuthenticated()){
+//check if admin
+function checkAdmin(req,res,next){
+    if(req.isAuthenticated() && req.user.admin == true){
         return next();
     }
     res.redirect('/');
-};
+}
 
 module.exports = router;

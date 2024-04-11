@@ -1,0 +1,29 @@
+<% if (error != '') { %>
+    <%= error %>
+<% } else { %>
+<div class="modify-user">
+<form action="/user/save" method="POST">
+    <h2 class="page-title">Edit Admin Privilige of user <%= item[0].username %></h2>
+    <div class="user-edit">
+        <div class="user-name">Username : <%= item[0].username %></div>
+        <div class="user-email">Email : <%= item[0].email %></div>
+        <div class="user-admin">Admin : 
+            <div>
+                <input type="radio" name="admin" id="true" value="true" <% if (item[0].admin == true) {%>checked<%}%>>
+                <label for="true">true</label>
+            </div>
+            <div>
+                <input type="radio" name="admin" id="false" value="false" <% if (item[0].admin == false) {%>checked<%}%>>
+                <label for="false">false</label>
+            </div>
+        </div>
+        <div class="user-btn">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-primary" onclick="javascript:location.href='/user-list';">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="javascript:location.href='/';">Go back to homepage</button>
+            <input type="hidden" name="userId" value="<%= item[0]._id %>">
+        </div>
+    </div>
+</form>
+</div>
+<% } %>

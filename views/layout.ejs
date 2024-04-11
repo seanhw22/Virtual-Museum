@@ -10,7 +10,11 @@
       <% } %>
       <%- body %>
       <% if (loggedIn == true) { %>
-        <center><a href="/artifact-list">Add & Modify Artifacts</a>
+        <center>
+        <% if (admin == true) { %>
+          <a href="/artifact-list">Add & Modify Artifacts</a><br><br>
+          <a href="/user-list">Modify Users</a>
+        <% } %>
         <form action="/logout?_method=DELETE" method="POST">
           <button type="submit">Log Out</button>
         </form>

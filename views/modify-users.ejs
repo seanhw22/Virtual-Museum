@@ -1,0 +1,30 @@
+<form action="/user-search" method="POST" class="search-form" id="searchForm">
+    <div>
+        <input type="text" class="form-control" name="searchInput" placeholder="Search users" <% if (search != '') { %> value="<%= search %>" <% } %>>
+        <div class="input-group-append"><button class="btn btn-primary">Search</button></div>
+    </div>
+</form>
+
+<center>
+<% if (message != '') { %>
+  <br>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+  <br>
+<% } %>
+</center>
+<br><br><br>
+<% if (data != null) { data.forEach( item => { %>
+  <% if (item.username != current) { %>
+    <p>Username : <%= item.username %></p>
+    <p>Email : <%= item.email %></p>
+    <p>Admin : <%= item.admin %></p>
+    <a href="/user/<%= item._id %>">Edit admin priviliges</a> &nbsp; 
+    <a href="/user/delete/<%= item._id %>" class="red" onclick="return confirm('Are you sure you wish to delete this account?');">Delete account</a>
+    <br><br>
+<% }}); } %>
+<br><br><br>
+<form action="/?_method=GET" method="POST">
+  <button type="submit">Go back to homepage</button>
+</form>

@@ -4,7 +4,7 @@
             </header>
             <main id="gallery">
                 <div id="welcome-message">
-                    <h2>Selamat datang di Museum Virtual!</h2>
+                    <h2>Selamat datang di Museum Virtual<% if (name != '') { %><%= name %><% } %>!</h2>
                 </div>
                 <form action="/search" method="POST" class="search-form" id="searchForm">
                     <div>
