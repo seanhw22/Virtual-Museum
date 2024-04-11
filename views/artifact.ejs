@@ -17,7 +17,8 @@
       <br>
     <% } %>
     </center>
-
+    <br><br><br>
+    <div id="artifact-container">
     <% if (data != null) { data.forEach( item => { %>
         <div class="artifact">
           <a href="<%= item.name %>"><img src="<%= item.image %>"></a>
@@ -28,6 +29,8 @@
             </div>
         </div>
     <% }); } %>
+    </div>
+    <br><br><br>
     <form action="/?_method=GET" method="POST">
       <button type="submit">Go back to homepage</button>
     </form>

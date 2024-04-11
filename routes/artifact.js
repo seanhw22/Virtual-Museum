@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const Artifact = require('../models/artifacts');
+const artifacts = require('../models/artifacts');
 
 router.use(express.static("public"));
 
@@ -18,6 +19,7 @@ router.post('/new', checkAuthenticated, async (req, res) => {
     let artifactImage = req.body.artifactImage;
     let artifactDescription = req.body.artifactDescription;
     let artifactArticle = req.body.artifactArticle;
+    let artifactSource = req.body.artifactSource;
     let qry = {name:artifactName};
 
     artifactDescription = insert_br(artifactDescription);
@@ -29,7 +31,8 @@ router.post('/new', checkAuthenticated, async (req, res) => {
                 name: artifactName,
                 image: artifactImage,
                 description: artifactDescription,
-                article: artifactArticle
+                article: artifactArticle,
+                source: artifactSource,
             });
 
             let saveArtifact = await newArtifact.save();
@@ -71,6 +74,7 @@ router.post('/save', checkAuthenticated, async(req, res) => {
     let artifactImage = req.body.artifactImage;
     let artifactDescription = req.body.artifactDescription;
     let artifactArticle = req.body.artifactArticle;
+    let artifactSource = req.body.artifactSource;
 
     artifactDescription = insert_br(artifactDescription);
     artifactArticle = insert_br(artifactArticle);
@@ -83,6 +87,7 @@ router.post('/save', checkAuthenticated, async(req, res) => {
             image: artifactImage,
             description: artifactDescription,
             article: artifactArticle,
+            source: artifactSource,
         }
     }
 

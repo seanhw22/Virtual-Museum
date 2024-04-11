@@ -5,14 +5,10 @@
 
     <body>
       <% if (loggedIn == true) { %>
-        logged in
       <% } %>
       <% if (loggedIn == false) { %>
-        logged out
       <% } %>
-
       <%- body %>
-
       <% if (loggedIn == true) { %>
         <center><a href="/artifact-list">Add & Modify Artifacts</a>
         <form action="/logout?_method=DELETE" method="POST">
@@ -26,7 +22,6 @@
         </form>
       <% } %>
       
-
       <script src="tugas.js"></script>
 
     </body>

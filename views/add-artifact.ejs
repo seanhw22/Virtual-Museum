@@ -1,15 +1,18 @@
         <br>
-        <center><h1>Add new artifacts</h1>
+        <div class="modify-artifacts">
         <form action="/artifact/new" method="POST">
+            <h1>Add new artifacts</h1>
             <p><input type="text" name="artifactName" placeholder="Name" required></p>
             <p><input type="text" name="artifactImage" placeholder="Image (url)" required></p>
             <p><textarea name="artifactDescription" placeholder="Short description" required></textarea></p>
             <p><textarea name="artifactArticle" placeholder="Article" required></textarea></p>
+            <p><input type="text" name="artifactSource" placeholder="Source"></p>
             <button type="submit" class="btn btn-primary">Add artifact</button>
-        </form></center>
+        </form>
         <form action="/artifact-list?_method=GET" method="POST">
             <button type="submit">Cancel</button>
         </form>
         <form action="/?_method=GET" method="POST">
             <button type="submit">Go back to homepage</button>
         </form>
+        </div>

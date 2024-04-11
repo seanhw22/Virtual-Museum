@@ -9,6 +9,5 @@ Anggota Kelompok 14 : <br>
 
 To do list : <br>
 admin user & admin check <br>
-link for article source as a new variable <br>
 redesign website <br>
 add quiz / extra features <br>

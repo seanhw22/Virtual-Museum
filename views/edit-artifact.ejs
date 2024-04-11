@@ -1,13 +1,15 @@
 <% if (error != '') { %>
     <%= error %>
 <% } else { %>
-<h2 class="page-title">Edit Artifact</h2>
+<div class="modify-artifacts">
 <form action="/artifact/save" method="POST">
+    <h2 class="page-title">Edit Artifact</h2>
     <div class="artifact-edit">
         <div class="artifact-name"><input type="text" name="artifactName" value="<%= item[0].name %>"></div>
-        <div class="artifact-image"><input type="text" name="artifactImage" value="<%= item[0].image %>"> <img src="<%= item[0].image %>" style="width: 25%; height: auto; border-radius: 8px 8px 0 0;"></div>
+        <div class="artifact-image"><input type="text" name="artifactImage" value="<%= item[0].image %>"> <img src="<%= item[0].image %>" style="width: 50%; height: auto;"></div>
         <div class="artifact-description"><textarea name="artifactDescription"><%= item[0].description %></textarea></div>
         <div class="artifact-article"><textarea name="artifactArticle"><%= item[0].article %></textarea></div>
+        <div class="artifact-source"><input type="text" name="artifactSource" value="<%= item[0].source %>"></div>
         <div class="artifact-btn">
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-primary" onclick="javascript:location.href='/artifact-list';">Cancel</button>
@@ -16,4 +18,5 @@
         </div>
     </div>
 </form>
+</div>
 <% } %>
