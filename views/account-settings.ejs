@@ -1,0 +1,14 @@
+<center><h1>Account Settings</h1></center>
+
+<form action="/user/<%= id %>/update-password?_method=GET" method="POST">
+    <button type="submit">Change Password</button>
+  </form>
+<form action="/user/<%= id %>/delete-self?_method=GET" method="POST">
+    <button type="submit" onclick="return confirm('Are you sure you wish to delete your account?');">Delete my account</button>
+</form>
+<form action="/?_method=GET" method="POST">
+    <button type="submit">Go back to homepage</button>
+</form>
+<form action="/logout?_method=DELETE" method="POST">
+    <button type="submit">Log Out</button>
+</form>

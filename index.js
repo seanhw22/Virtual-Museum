@@ -13,6 +13,7 @@ const flash = require('express-flash');
 const artifactRoute = require('./routes/artifact.js');
 const artifacts = require('./models/artifacts.js');
 const userRoute = require('./routes/user.js');
+const forgotPasswordRoute = require('./routes/forgot-password.js')
 const User = users;
 const Artifact = artifacts;
 
@@ -81,13 +82,16 @@ app.use(function(req, res, next) {
 // homepage
 app.get('/', async(req, res) => {
     const artifactResult = (await Artifact.find().lean());
+    var id = '';
     var name = '';
     var admin = false;
     if(req.isAuthenticated()){
+        id = req.user._id;
         name = ', '+req.user.username;
         admin = req.user.admin;
     }
     res.render("index.ejs", { 
+        id : id,
         name : name,
         admin: admin,
         title : "Museum Virtual", 
@@ -100,12 +104,14 @@ app.get('/', async(req, res) => {
     });
 });
 
-// search
+// search in homepage
 app.post('/search', async(req, res) => {
     const artifactResult = (await Artifact.find().lean());
+    var id;
     var name = '';
     var admin = false;
     if(req.isAuthenticated()){
+        id = req.user._id;
         name = ', '+req.user.username;
         admin = req.user.admin;
     }
@@ -128,6 +134,7 @@ app.post('/search', async(req, res) => {
     }
   
     res.render("index.ejs", {
+        id : id,
         name : name,
         admin: admin,
         title : "Museum Virtual", 
@@ -142,7 +149,7 @@ app.post('/search', async(req, res) => {
 
 //login
 app.get('/login', checkNotAuthenticated, (req, res) => {
-    res.render('login.ejs')
+    res.render('login.ejs', {message:''})
 });
 
 //register
@@ -263,6 +270,10 @@ app.post('/user-search', checkAdmin, async(req, res) => {
                 userData = userResult;
                 message = 'No results.'
             }
+            if(userData.length == 1 && userData[0].username == currentUserData){
+                userData = userResult;
+                message = 'You cannot search & set admin priviliges on your own account.'
+            }
         });
     } else {
         q = 'Search';
@@ -271,6 +282,15 @@ app.post('/user-search', checkAdmin, async(req, res) => {
   
     res.render("modify-users.ejs", {layouts: 'layout', data : userData, current: currentUserData, search:q, message:message});
 });
+
+// forgot password
+app.use('/forgot-password', forgotPasswordRoute);
+
+// account settings
+app.get('/account-settings', checkAuthenticated, async(req,res) => {
+    const id = req.user._id;
+    res.render("account-settings", {id: id})
+})
 
 // port
 app.listen(PORT, () => {

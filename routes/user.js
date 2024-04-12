@@ -54,7 +54,38 @@ router.post('/save', checkAdmin, async(req, res) => {
     res.redirect('/');
 });
 
-//check if authenticated
+router.get('/:id/update-password', checkAuthenticated, async(req,res) => {
+    res.render('update-password', {id : req.params.id})
+})
+
+// update password
+router.post('/:id/update-password', checkAuthenticated, async(req,res) => {
+    let qry = {_id:req.params.id};
+    User.findOne(qry).then( (user) => {
+        user.changePassword(req.body.old, req.body.new)
+        .then(() => {
+            console.log('Password changed.');
+            res.redirect('/');
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+})
+
+// delete own account
+router.get('/:id/delete-self', checkAuthenticated, async(req, res) => {
+
+    let userId = req.params.id;
+    let qry = {_id:userId};
+    let deleteResult = await User.deleteOne(qry);
+    res.redirect('/');
+});
+
+//check authentication
 function checkAuthenticated(req,res,next){
     if(req.isAuthenticated()){
         return next();

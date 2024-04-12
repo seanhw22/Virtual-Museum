@@ -17,14 +17,9 @@
 
 <body>
   <div class="container">
-    <% if (messages.error) { %>
-      <div class="alert alert-danger" role="alert">
-        <%= messages.error %>
-      </div>
-    <% } %>
-    <% if (messages.success) { %>
+    <% if (message != '') { %>
       <div class="alert alert-success" role="alert">
-        <%= messages.success %>
+        <%= message %>
       </div>
     <% } %>
     <h1>Login</h1>
@@ -43,6 +38,7 @@
        <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <!-- register -->
+    <a href="/forgot-password">Forgot password?</a><br>
     <a href="/register">Register</a><br>
     <a href="/">Back to homepage</a>
   </div>

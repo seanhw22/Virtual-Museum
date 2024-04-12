@@ -1,0 +1,11 @@
+<% if (message != '') { %>
+    <div class="alert alert-danger" role="alert">
+      <%= message %>
+    </div>
+  <% } %>
+<form action="/forgot-password" method="POST">
+    What was the username of your account?<br>
+    <input type="text" name="username">
+    <button type="submit">Check account</button>
+    <button type="button" onclick="javascript:location.href='/login';">Cancel</button>
+</form>
