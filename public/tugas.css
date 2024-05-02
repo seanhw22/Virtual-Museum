@@ -1,11 +1,83 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+li {
+    margin-left: 10px;
+}
+
+li a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+/* Search Form Styles */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input[type="text"] {
+    width: 200px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #555;
+}
+
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;
-    /* Background color for the whole page */
+    background-image: url('download.jpeg');
+    /* Ganti 'background-image.jpg' dengan gambar latar belakang Anda */
+    background-size: cover;
+    background-position: center;
 }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Other Styles */
+/* Tambahkan elemen desain sesuai kebutuhan */
 
 .container {
     max-width: 1200px;
@@ -137,28 +209,33 @@ button:hover {
 }
 
 .artifact-info {
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 0 0 8px 8px;
+    padding: 20px;
+    /* Increased padding for consistency */
+    background-color: #f8f9fa;
+    /* Changed background color to match global background */
+    border-radius: 8px;
+    /* Applied border-radius to all corners */
 }
 
-.artifact-info h3,p {
+
+.artifact-info h3,
+p {
     white-space: wrap;
 }
 
 #about-us {
     padding: 15px;
     padding-left: 35px;
-    background-color: #fff;
+    background-color: #ebe7e7;
     border-radius: 0 0 8px 8px;
 }
 
-.modify-artifacts{
+.modify-artifacts {
     width: 500px;
     clear: both;
 }
 
-.modify-artifacts input{
+.modify-artifacts input {
     width: 100%;
     clear: both;
 }
@@ -168,12 +245,12 @@ button:hover {
     width: 1000px;
 }
 
-.modify-user{
+.modify-user {
     width: 500px;
     clear: both;
 }
 
-.modify-user input{
+.modify-user input {
     width: 10%;
     clear: both;
     margin-left: auto;

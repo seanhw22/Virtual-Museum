@@ -1,38 +1,54 @@
-        <div id="main-container" style="display: block;">
-            <header>
-                <h1>Virtual Museum</h1>
-            </header>
-            <main id="gallery">
-                <div id="welcome-message">
-                    <h2>Selamat datang di Museum Virtual<% if (name != '') { %><%= name %><% } %>!</h2>
-                </div>
-                <form action="/search" method="POST" class="search-form" id="searchForm">
-                    <div>
-                        <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search != '') { %> value="<%= search %>" <% } %>>
-                        <div class="input-group-append"><button class="btn btn-primary">Search</button></div>
-                    </div>
-                </form>
-            
-                <center>
-                <% if (message != '') { %>
-                  <br>
-                  <div class="alert alert-danger" role="alert">
+<div id="main-container" style="display: block;">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/artifact-list">Exhibits</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#" onclick="showAboutUs()">About Us</a></li>
+                <!-- Perhatikan perubahan href ke #about-us -->
+            </ul>
+            <!-- Formulir pencarian dipindahkan ke dalam navbar -->
+            <form action="/search" method="POST" class="search-form" id="searchForm" style="margin-left: auto;">
+                <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search
+                    !='' ) { %> value="<%= search %>" <% } %>>
+                        <button class="btn btn-primary" style="margin-left: 5px;">Search</button>
+            </form>
+        </nav>
+        <h1>Virtual Museum</h1>
+    </header>
+    <main id="gallery">
+        <div id="welcome-message">
+            <h2>Selamat datang di Museum Virtual<% if (name !='' ) { %>
+                    <%= name %>
+                        <% } %>!</h2>
+        </div>
+
+
+        <center>
+            <% if (message !='' ) { %>
+                <br>
+                <div class="alert alert-danger" role="alert">
                     <%= message %>
-                  </div>
-                  <br>
+                </div>
+                <br>
                 <% } %>
-                </center>
-                <div id="artifact-container" data-value="<%= JSON.stringify(data) %>"></div>
-                <button onclick="showAboutUs()">About Us</button>
-            </main>
-        </div>
-        <div id="artifact-details" style="display: none;"></div>
-        <div id="about-us" style="display: none;">
-            <center><h2>About Us</h2></center>
-                <% mahasiswa.forEach(mhs => { %>
-                    <p>Name : <%= mhs.name%></p>
-                    <p>Email : <%= mhs.email%></p>
-                    <br>
-                <% }) %>
-                <button onclick="closeAboutUs()">Go Back</button>
-        </div>
+        </center>
+        <div id="artifact-container" data-value="<%= JSON.stringify(data) %>"></div>
+
+    </main>
+</div>
+<div id="artifact-details" style="display: none;"></div>
+<div id="about-us" style="display: none;">
+    <center>
+        <h2>About Us</h2>
+    </center>
+    <% mahasiswa.forEach(mhs=> { %>
+        <p>Name : <%= mhs.name%>
+        </p>
+        <p>Email : <%= mhs.email%>
+        </p>
+        <br>
+        <% }) %>
+            <button onclick="closeAboutUs()">Go Back</button>
+</div>
