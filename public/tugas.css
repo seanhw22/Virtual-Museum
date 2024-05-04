@@ -256,3 +256,23 @@ p {
     margin-left: auto;
     margin-right: auto;
 }
+
+.modify-quizzes {
+    width: 500px;
+    clear: both;
+}
+
+.modify-quizzes input[type="radio"] {
+    width: 10%;
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.correct{
+    background: #9aeabc;
+}
+
+.incorrect{
+    background: #ff9393;
+}

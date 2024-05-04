@@ -1,0 +1,33 @@
+<% if (error != '') { %>
+    <%= error %>
+<% } else { %>
+<div class="modify-quizzes">
+<form action="/quiz/save" method="POST">
+    <h2 class="page-title">Edit Quiz</h2>
+    <div class="quiz-edit">
+        <input type="text" name="quizQuestion" value="<%= item[0].question %>">
+        <% var answerCount %>
+        <% if (item != null) {item[0].answers.forEach((answer, index) => { %>
+            <div id="answer">
+                <input type="text" name="quizAnswer<%= index+1 %>" value="<%= answer.text %>">
+                <div>
+                    <input type="radio" name="correct<%= index+1 %>" id="true<%= index+1 %>" value="true" <% if (answer.correct == true) { %>checked<% } %>>
+                    <label for="true<%= index+1 %>">True</label>
+                </div>
+                <div>
+                    <input type="radio" name="correct<%= index+1 %>" id="false<%= index+1 %>" value="false" <% if (answer.correct == false) { %>checked<% } %>>
+                    <label for="false<%= index+1 %>">False</label>
+                </div>
+            </div>
+        <% answerCount = index;});answerCount = answerCount+1} %>
+        <div class="quiz-btn">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-primary" onclick="javascript:location.href='/quiz-list';">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="javascript:location.href='/';">Go back to homepage</button>
+            <input type="hidden" name="quizId" value="<%= item[0]._id %>">
+            <input type="hidden" name="answerIndex" value="<%= answerCount %>">
+        </div>
+    </div>
+</form>
+</div>
+<% } %>

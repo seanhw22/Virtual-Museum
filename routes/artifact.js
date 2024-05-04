@@ -36,7 +36,7 @@ router.post('/new', checkAdmin, async (req, res) => {
 
             let saveArtifact = await newArtifact.save();
         }
-        res.redirect('/')
+        res.redirect('/artifact-list')
     });
 });
 
@@ -46,7 +46,7 @@ router.get('/delete/:id', checkAdmin, async(req, res) => {
     let artifactId = req.params.id;
     let qry = {_id:artifactId};
     let deleteResult = await Artifact.deleteOne(qry);
-    res.redirect('/');
+    res.redirect('/artifact-list');
 });
 
 // get artifact
@@ -92,7 +92,7 @@ router.post('/save', checkAdmin, async(req, res) => {
 
     let updateResult = await Artifact.updateOne(qry, saveData);
 
-    res.redirect('/');
+    res.redirect('/artifact-list');
 });
 
 //check if admin

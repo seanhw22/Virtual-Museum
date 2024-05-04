@@ -1,11 +1,11 @@
     <form action="/q" method="POST" class="search-form" id="searchForm">
         <div>
-            <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search != '') { %> value="<%= search %>" <% } %>>
+            <input type="text" class="form-control" name="searchInput" placeholder="Search quizzes" <% if (search != '') { %> value="<%= search %>" <% } %>>
             <div class="input-group-append"><button class="btn btn-primary">Search</button></div>
         </div>
     </form>
-    <form action="/add-artifact?_method=GET" method="POST">
-      <button type="submit">Add Artifact</button>
+    <form action="/add-quiz?_method=GET" method="POST">
+      <button type="submit">Add Quiz</button>
     </form>
 
     <center>
@@ -18,14 +18,13 @@
     <% } %>
     </center>
     <br><br><br>
-    <div id="artifact-container">
+    <div id="quiz-container">
     <% if (data != null) { data.forEach( item => { %>
-        <div class="artifact">
-          <img src="<%= item.image %>">
-            <div class="artifact-info">
-              <h3><%= item.name %></h3>
-              <a href="/artifact/<%= item._id %>">Edit</a> &nbsp; 
-              <a href="/artifact/delete/<%= item._id %>" class="red" onclick="return confirm('Are you sure you wish to delete this?');">Delete</a>
+        <div class="quiz">
+            <div class="quiz-info">
+              <h3><%= item.question %></h3>
+              <a href="/quiz/<%= item._id %>">Edit</a> &nbsp; 
+              <a href="/quiz/delete/<%= item._id %>" class="red" onclick="return confirm('Are you sure you wish to delete this?');">Delete</a>
             </div>
         </div>
     <% }); } %>

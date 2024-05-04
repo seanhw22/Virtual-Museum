@@ -1,0 +1,79 @@
+        <br>
+        <div class="add-quizzes">
+        <form id="quizForm" action="/quiz/new" method="POST">
+            <h1>Add new quizzes</h1>
+            <p><input type="text" name="quizQuestion" placeholder="Question" required></p>
+            <div id="answer"></div>
+            <!-- <button onclick="addAnswer()">Add an answer</button> -->
+            <button type="submit" onclick="sendIndex()" class="btn btn-primary">Add quiz</button>
+        </form>
+        <form action="/quiz-list?_method=GET" method="POST">
+            <button type="submit">Cancel</button>
+        </form>
+        <form action="/?_method=GET" method="POST">
+            <button type="submit">Go back to homepage</button>
+        </form>
+        </div>
+        <script>
+            var index = 1;
+            var indexMax = 4
+            const answers = document.getElementById("answer");
+            function addAnswer(){
+                const answerText = document.createElement("input");
+                answerText.type = "text";
+                answerText.name = "quizAnswer" + index;
+                answerText.placeholder = "Answer" + index;
+                answerText.required = true;
+
+                const answerCorrect = document.createElement("input");
+                answerCorrect.type = "radio"
+                answerCorrect.name = "correct" + index;
+                answerCorrect.id = "true" + index;
+                answerCorrect.value = "true";
+                answerCorrect.required = true;
+
+                const answerCorrectLabel = document.createElement("label");
+                answerCorrectLabel.htmlFor = "true" + index;
+                answerCorrectLabel.textContent = "Correct";
+
+                const answerFalse = document.createElement("input");
+                answerFalse.type = "radio"
+                answerFalse.name = "correct" + index;
+                answerFalse.id = "false" + index;
+                answerFalse.value = "false";
+                answerFalse.required = true;
+
+                const answerFalseLabel = document.createElement("label");
+                answerFalseLabel.htmlFor = "false" + index;
+                answerFalseLabel.textContent = "False";
+
+                const containerCorrect = document.createElement("div");
+                containerCorrect.appendChild(answerCorrect);
+                containerCorrect.appendChild(answerCorrectLabel);
+                const containerFalse = document.createElement("div");
+                containerFalse.appendChild(answerFalse);
+                containerFalse.appendChild(answerFalseLabel);
+
+                answers.appendChild(answerText)
+                answers.appendChild(containerCorrect);
+                answers.appendChild(containerFalse);
+
+                index++;
+            }
+
+            function createAnswer(){
+                while (index <= indexMax){
+                    addAnswer();
+                }
+            }
+
+            function sendIndex(){
+                const indexValue = document.createElement("input");
+                indexValue.type = "hidden";
+                indexValue.name = "answerIndex";
+                indexValue.value = index;
+                answers.appendChild(indexValue);
+            }
+
+            createAnswer();
+        </script>

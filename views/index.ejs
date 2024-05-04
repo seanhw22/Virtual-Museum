@@ -3,8 +3,9 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/artifact-list">Exhibits</a></li>
-                <li><a href="#events">Events</a></li>
+                <% if (loggedIn == true) { %>
+                    <li><a href="/take-quiz">Take Quiz</a></li>
+                <% } %>
                 <li><a href="#" onclick="showAboutUs()">About Us</a></li>
                 <!-- Perhatikan perubahan href ke #about-us -->
             </ul>

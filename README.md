@@ -8,6 +8,5 @@ Anggota Kelompok 14 : <br>
     - Paulina Agustina / 535220048 <br>
 
 To do list : <br>
-update password & delete account <br>
+sort and filter <br>
 redesign website <br>
-add quiz / extra features <br>

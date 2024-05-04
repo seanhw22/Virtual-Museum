@@ -1,0 +1,110 @@
+<div class="app">
+    <div id="intro">
+        <h1>Artifact Quiz</h1>
+        <p>The quiz will have questions about the artifact within this website.</p>
+        <p>Press "Start Quiz" whenever you're ready.</p>
+    </div>
+    <div class="quiz" id="quiz" data-value="<%= JSON.stringify(data) %>">
+        <h2 id="question"></h2>
+        <div id="answer-buttons"></div>
+        <button id="next-btn" style="display: none;">Next</button>
+        <button id="start-btn" onclick="startQuiz()">Start Quiz</button>
+        <button id="back-btn" onclick="javascript:location.href='/';">Go back to homepage</button>
+    </div>
+</div>
+
+<script>
+    const questionsString = document.getElementById("quiz").getAttribute("data-value");
+    const questions = JSON.parse(questionsString);
+    const introElement = document.getElementById("intro")
+    const questionElement = document.getElementById("question");
+    const answerButtons = document.getElementById("answer-buttons");
+    const nextButton = document.getElementById("next-btn");
+    const startButton = document.getElementById("start-btn");
+    const backButton = document.getElementById("back-btn")
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function startQuiz(){
+        introElement.style.display = "none"
+        startButton.style.display = "none";
+        backButton.style.display = "none";
+        currentQuestionIndex = 0;
+        score = 0;
+        nextButton.innerHTML = "Next";
+        showQuestion();
+    }
+
+    function showQuestion(){
+        resetState();
+        let currentQuestion = questions[currentQuestionIndex];
+        let questionNo = currentQuestionIndex + 1;
+        questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+        const shuffledAnswers = currentQuestion.answers.slice().sort(() => Math.random() - 0.5);
+
+        shuffledAnswers.forEach(answer => {
+            const button = document.createElement("button");
+            button.innerHTML = answer.text;
+            button.classList.add("btn");
+            answerButtons.appendChild(button);
+            if(answer.correct){
+                button.dataset.correct = answer.correct;
+            }
+            button.addEventListener("click", selectAnswer)
+        });
+    }
+
+    function resetState(){
+        nextButton.style.display = "none";
+        while(answerButtons.firstChild){
+            answerButtons.removeChild(answerButtons.firstChild);
+        }
+    }
+
+    function selectAnswer(e){
+        const selectedBtn = e.target;
+        const isCorrect = selectedBtn.dataset.correct === "true";
+        if (isCorrect) {
+            selectedBtn.classList.add("correct");
+            score++;
+        } else {
+            selectedBtn.classList.add("incorrect")
+        }
+        Array.from(answerButtons.children).forEach(button => {
+            if (button.dataset.correct === "true"){
+                button.classList.add("correct");
+            }
+            button.disabled = true;
+        });
+        nextButton.style.display = "block";
+    }
+
+    function showScore(){
+        resetState();
+        questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
+        nextButton.innerHTML = "Play Again";
+        nextButton.style.display = "block";
+        backButton.style.display = "block";
+    }
+
+    function handleNextButton(){
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length){
+            showQuestion();
+        } else {
+            showScore();
+        }
+    }
+
+    nextButton.addEventListener("click", () => {
+        if(currentQuestionIndex < questions.length){
+            handleNextButton();
+        } else {
+            startQuiz();
+        }
+    })
+
+    // startQuiz();
+</script>

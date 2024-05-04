@@ -13,9 +13,12 @@ const flash = require('express-flash');
 const artifactRoute = require('./routes/artifact.js');
 const artifacts = require('./models/artifacts.js');
 const userRoute = require('./routes/user.js');
-const forgotPasswordRoute = require('./routes/forgot-password.js')
+const forgotPasswordRoute = require('./routes/forgot-password.js');
+const quizzes = require('./models/quizzes.js');
+const quizRoute = require('./routes/quiz.js')
 const User = users;
 const Artifact = artifacts;
+const Quiz = quizzes;
 
 //mongo
 dotenv.config()
@@ -244,6 +247,23 @@ app.post('/q', checkAdmin, async(req, res) => {
     }
   
     res.render("artifact.ejs", {layouts: 'layout', data : artifactData, search:q, message:message});
+});
+
+//quiz
+app.use('/quiz', quizRoute);
+
+app.get('/take-quiz', checkAuthenticated, async(req,res) => {
+    const quizResult = (await Quiz.find().lean());
+    res.render('quiz.ejs', {data: quizResult})
+})
+
+app.get('/quiz-list', checkAdmin, async(req, res) => {
+    const quizResult = (await Quiz.find().lean());
+    res.render("quiz-list.ejs", {layouts: 'layout', data : quizResult, search:'', message:''})
+})
+
+app.get('/add-quiz', checkAdmin, (req, res) => {
+    res.render("add-quiz.ejs", {layouts: 'layout'})
 });
 
 // modify users

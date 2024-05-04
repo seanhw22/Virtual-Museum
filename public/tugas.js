@@ -47,7 +47,7 @@ function generateArtifacts() {
 
         const infoElement = document.createElement("div");
         infoElement.classList.add("artifact-info");
-        infoElement.innerHTML = `<h3>${artifact.name}</h3><p>${artifact.description}</p>`;
+        infoElement.innerHTML = `<h3>${artifact.name}</h3>`;
         artifactElement.appendChild(infoElement);
 
         gallery.appendChild(artifactElement);

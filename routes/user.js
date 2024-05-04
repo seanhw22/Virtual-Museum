@@ -11,7 +11,7 @@ router.get('/delete/:id', checkAdmin, async(req, res) => {
     let userId = req.params.id;
     let qry = {_id:userId};
     let deleteResult = await User.deleteOne(qry);
-    res.redirect('/');
+    res.redirect('/user-list');
 });
 
 // get user
@@ -51,7 +51,7 @@ router.post('/save', checkAdmin, async(req, res) => {
 
     let updateResult = await User.updateOne(qry, saveData);
 
-    res.redirect('/');
+    res.redirect('/user-list');
 });
 
 router.get('/:id/update-password', checkAuthenticated, async(req,res) => {
