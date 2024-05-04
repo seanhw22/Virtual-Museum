@@ -1,7 +1,12 @@
     <form action="/q" method="POST" class="search-form" id="searchForm">
         <div>
             <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search != '') { %> value="<%= search %>" <% } %>>
-            <div class="input-group-append"><button class="btn btn-primary">Search</button></div>
+            <div class="input-group-append">
+              <button class="btn btn-primary">Search</button>
+              <button name="ascending" onclick="sortAscending()">Sort Ascending</button>
+              <button name="descending" onclick="sortDescending()">Sort Descending</button>
+              <input type="hidden" name="sort" id="sort" value="">
+            </div>
         </div>
     </form>
     <form action="/add-artifact?_method=GET" method="POST">
@@ -34,3 +39,13 @@
     <form action="/?_method=GET" method="POST">
       <button type="submit">Go back to homepage</button>
     </form>
+
+    <script>
+      const sortType = document.getElementById("sort")
+      function sortAscending(){
+          sortType.value = "ascending"
+      }
+      function sortDescending(){
+          sortType.value = "descending"
+      }
+    </script>

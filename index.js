@@ -109,6 +109,7 @@ app.get('/', async(req, res) => {
 
 // search in homepage
 app.post('/search', async(req, res) => {
+    var sort = req.body.sort;
     const artifactResult = (await Artifact.find().lean());
     var id;
     var name = '';
@@ -124,13 +125,19 @@ app.post('/search', async(req, res) => {
     let message = '';
   
     if (q != null) {
-        let artifactSearch = await Artifact.find(qry).then( (data) => {
-            artifactData = data;
-            if(artifactData.length == 0){
-                artifactData = artifactResult;
-                message = 'No results.'
-            }
-        });
+        var artifactSearch;
+        if (sort == "ascending"){
+            artifactSearch = await Artifact.find(qry).sort({ name: 1 });
+        } else if (sort == "descending"){
+            artifactSearch = await Artifact.find(qry).sort({ name: -1 });
+        } else {
+            artifactSearch = await Artifact.find(qry);
+        }
+        artifactData = artifactSearch;
+        if(artifactData.length == 0){
+            artifactData = artifactResult;
+            message = 'No results.'
+        }
     } else {
         q = 'Search';
         artifactData = artifactResult;
@@ -227,6 +234,7 @@ app.get('/artifact-list', checkAdmin, async(req, res) => {
 
 // search for artifact in modify artifacts
 app.post('/q', checkAdmin, async(req, res) => {
+    var sort = req.body.sort;
     const artifactResult = (await Artifact.find().lean());
     let q = req.body.searchInput;
     let artifactData = null;
@@ -234,13 +242,19 @@ app.post('/q', checkAdmin, async(req, res) => {
     let message = '';
   
     if (q != null) {
-        let artifactSearch = await Artifact.find(qry).then( (data) => {
-            artifactData = data;
-            if(artifactData.length == 0){
-                artifactData = artifactResult;
-                message = 'No results.'
-            }
-        });
+        var artifactSearch;
+        if (sort == "ascending"){
+            artifactSearch = await Artifact.find(qry).sort({ name: 1 });
+        } else if (sort == "descending"){
+            artifactSearch = await Artifact.find(qry).sort({ name: -1 });
+        } else {
+            artifactSearch = await Artifact.find(qry);
+        }
+        artifactData = artifactSearch;
+        if(artifactData.length == 0){
+            artifactData = artifactResult;
+            message = 'No results.'
+        }
     } else {
         q = 'Search';
         artifactData = artifactResult;
@@ -266,6 +280,36 @@ app.get('/add-quiz', checkAdmin, (req, res) => {
     res.render("add-quiz.ejs", {layouts: 'layout'})
 });
 
+app.post('/quiz-search', checkAdmin, async(req, res) => {
+    var sort = req.body.sort;
+    const quizResult = (await Quiz.find().lean());
+    let q = req.body.searchInput;
+    let quizData = null;
+    let qry = {question:{$regex:'^' + q, $options:'i'}};
+    let message = '';
+  
+    if (q != null) {
+        var quizSearch;
+        if (sort == "ascending"){
+            quizSearch = await Quiz.find(qry).sort({ question: 1 });
+        } else if (sort == "descending"){
+            quizSearch = await Quiz.find(qry).sort({ question: -1 });
+        } else {
+            quizSearch = await Quiz.find(qry);
+        }
+        quizData = quizSearch;
+        if(quizData.length == 0){
+            quizData = quizResult;
+            message = 'No results.'
+        }
+    } else {
+        q = 'Search';
+        quizData = quizResult;
+    }
+  
+    res.render("quiz-list.ejs", {layouts: 'layout', data : quizData, search:q, message:message});
+});
+
 // modify users
 app.use('/user', userRoute);
 
@@ -276,6 +320,8 @@ app.get('/user-list', checkAdmin, async(req, res) => {
 })
 
 app.post('/user-search', checkAdmin, async(req, res) => {
+    var sort = req.body.sort;
+    console.log(sort)
     const userResult = (await User.find().lean());
     let q = req.body.searchInput;
     let userData = null;
@@ -284,17 +330,23 @@ app.post('/user-search', checkAdmin, async(req, res) => {
     let currentUserData = req.user.username;
   
     if (q != null) {
-        let userSearch = await User.find(qry).then( (data) => {
-            userData = data;
-            if(userData.length == 0){
-                userData = userResult;
-                message = 'No results.'
-            }
-            if(userData.length == 1 && userData[0].username == currentUserData){
-                userData = userResult;
-                message = 'You cannot search & set admin priviliges on your own account.'
-            }
-        });
+        var userSearch;
+        if (sort == "ascending"){
+            userSearch = await User.find(qry).sort({ name: 1 });
+        } else if (sort == "descending"){
+            userSearch = await User.find(qry).sort({ name: -1 });
+        } else {
+            userSearch = await User.find(qry);
+        }
+        userData = userSearch;
+        if(userData.length == 0){
+            userData = userResult;
+            message = 'No results.'
+        }
+        if(userData.length == 1 && userData[0].username == currentUserData){
+            userData = userResult;
+            message = 'You cannot search & set admin priviliges on your own account.'
+        }
     } else {
         q = 'Search';
         userData = userResult;
