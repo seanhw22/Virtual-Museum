@@ -34,6 +34,7 @@ li a:hover {
 .search-form {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .search-form input[type="text"] {
