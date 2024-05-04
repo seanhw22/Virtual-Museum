@@ -89,24 +89,56 @@ body {
 }
 
 /* Login Page Styles */
-#login-container {
-    background-image: url('download.jpeg');
-    /* Background image for the login container */
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    /* Center the content horizontally */
-    color: #fff;
-    /* Text color */
+body {
+    background-color: #234f7a;
+    /* Warna latar belakang */
 }
 
-#login-container h1 {
-    margin-bottom: 20px;
-    /* Add some space below the heading */
+.container {
+    background-color: #87CEEB;
+    /* Warna latar belakang kotak */
+    border-radius: 10px;
+    /* Agar kotak terlihat lebih bulat */
+    padding: 20px;
+    /* Berikan ruang di dalam kontainer */
+    margin-top: 50px;
+    /* Berikan jarak dari atas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Efek bayangan untuk kedalaman */
 }
+
+h1 {
+    text-align: center;
+    /* Pusatkan judul */
+    margin-bottom: 30px;
+    /* Berikan jarak dari bawah judul */
+}
+
+.form-label {
+    font-weight: bold;
+    /* Berikan ketebalan pada label form */
+}
+
+.btn-primary {
+    width: 100%;
+    /* Tombol mengisi lebar parentnya */
+    margin-top: 20px;
+    /* Berikan jarak dari atas */
+}
+
+a {
+    /* Ubah link menjadi blok */
+    text-align: center;
+    /* Pusatkan teks link */
+    margin-top: 10px;
+    /* Berikan jarak dari atas */
+}
+
+.alert {
+    margin-bottom: 20px;
+    /* Berikan jarak dari bawah */
+}
+
 
 form {
     max-width: 400px;
@@ -269,10 +301,66 @@ p {
     margin-right: auto;
 }
 
-.correct{
+.correct {
     background: #9aeabc;
 }
 
-.incorrect{
+.incorrect {
     background: #ff9393;
+}
+
+.app {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#intro,
+.quiz {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1,
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.correct {
+    background-color: #28a745 !important;
+}
+
+.incorrect {
+    background-color: #dc3545 !important;
+}
+
+#next-btn,
+#back-btn,
+#start-btn {
+    display: block;
+    /* Mengubah tampilan tombol menjadi block */
 }
