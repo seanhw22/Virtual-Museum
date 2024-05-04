@@ -97,15 +97,15 @@ body {
 
 .container {
     background-color: #87CEEB;
-    /* Warna latar belakang kotak */
+
     border-radius: 10px;
-    /* Agar kotak terlihat lebih bulat */
+
     padding: 20px;
-    /* Berikan ruang di dalam kontainer */
+
     margin-top: 50px;
-    /* Berikan jarak dari atas */
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Efek bayangan untuk kedalaman */
+
 }
 
 h1 {
@@ -195,7 +195,7 @@ button:hover {
 #gallery {
     margin: 50px;
     background-image: url('download.jpeg');
-    /* Ganti 'download.jpeg' dengan nama file gambar latar belakang Anda */
+
     background-size: cover;
     background-position: center;
     justify-content: space-around;
@@ -259,7 +259,7 @@ p {
 #about-us {
     padding: 15px;
     padding-left: 35px;
-    background-color: #ebe7e7;
+    background: linear-gradient(to bottom right, #ff7e5f, #feb47b, #ffde7d, #a9d18e);
     border-radius: 0 0 8px 8px;
 }
 
@@ -363,5 +363,5 @@ p {
 #back-btn,
 #start-btn {
     display: block;
-    /* Mengubah tampilan tombol menjadi block */
+
 }
