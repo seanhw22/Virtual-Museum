@@ -74,7 +74,6 @@ router.post('/save', checkAdmin, async(req, res) => {
     let quizId = req.body.quizId;
     let quizQuestion = req.body.quizQuestion;
     let answerIndex = req.body.answerIndex;
-    console.log(answerIndex)
     var quizAnswers = [];
     var quizAnswer = {};
     for (let i = 1; i <= answerIndex; i++) {
@@ -83,7 +82,6 @@ router.post('/save', checkAdmin, async(req, res) => {
         quizAnswer.correct = req.body['correct' + i] === 'true';
         quizAnswers.push(quizAnswer)
     }
-    console.log(quizAnswers)
 
     quizQuestion = insert_br(quizQuestion);
 
@@ -98,7 +96,7 @@ router.post('/save', checkAdmin, async(req, res) => {
 
     let updateResult = await Quiz.updateOne(qry, saveData);
 
-    res.redirect('/');
+    res.redirect('/quiz-list');
 });
 
 //check if admin

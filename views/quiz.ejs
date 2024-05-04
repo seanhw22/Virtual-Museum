@@ -23,6 +23,8 @@
     const startButton = document.getElementById("start-btn");
     const backButton = document.getElementById("back-btn")
 
+    const shuffledQuestions = questions.slice().sort(() => Math.random() - 0.5);
+
     let currentQuestionIndex = 0;
     let score = 0;
 
@@ -38,7 +40,7 @@
 
     function showQuestion(){
         resetState();
-        let currentQuestion = questions[currentQuestionIndex];
+        let currentQuestion = shuffledQuestions[currentQuestionIndex];
         let questionNo = currentQuestionIndex + 1;
         questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
 

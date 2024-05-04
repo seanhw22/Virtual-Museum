@@ -11,9 +11,11 @@
             </ul>
             <!-- Formulir pencarian dipindahkan ke dalam navbar -->
             <form action="/search" method="POST" class="search-form" id="searchForm" style="margin-left: auto;">
-                <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search
-                    !='' ) { %> value="<%= search %>" <% } %>>
-                        <button class="btn btn-primary" style="margin-left: 5px;">Search</button>
+                <input type="text" class="form-control" name="searchInput" placeholder="Search artifacts" <% if (search!='' ) { %> value="<%= search %>" <% } %>>
+                    <button class="btn btn-primary" style="margin-left: 5px;">Search</button>
+                    <button name="ascending" onclick="sortAscending()">Sort Ascending</button>
+                    <button name="descending" onclick="sortDescending()">Sort Descending</button>
+                    <input type="hidden" name="sort" id="sort" value="">
             </form>
         </nav>
         <h1>Virtual Museum</h1>
@@ -53,3 +55,85 @@
         <% }) %>
             <button onclick="closeAboutUs()">Go Back</button>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        generateArtifacts();
+    });
+
+    function generateArtifacts() {
+        var artifactDataString = document.getElementById("artifact-container").getAttribute("data-value");
+        var artifactData = JSON.parse(artifactDataString);
+
+        const gallery = document.getElementById("artifact-container");
+    
+        artifactData.forEach((artifact) => {
+            const artifactElement = document.createElement("div");
+            artifactElement.classList.add("artifact");
+
+            artifactElement.addEventListener("click", function () {
+                showArtifactDetails(JSON.stringify(artifact));
+            });
+
+            const imageElement = document.createElement("img");
+            imageElement.src = artifact.image;
+            artifactElement.appendChild(imageElement);
+
+            const infoElement = document.createElement("div");
+            infoElement.classList.add("artifact-info");
+            infoElement.innerHTML = `<h3>${artifact.name}</h3>`;
+            artifactElement.appendChild(infoElement);
+
+            gallery.appendChild(artifactElement);
+        });
+    }
+
+    function showArtifactDetails(artifactString) {
+        const artifact = JSON.parse(artifactString);
+        const detailsContainer = document.getElementById("artifact-details");
+        if (artifact.source == ''){
+            detailsContainer.innerHTML = `
+            <h2>${artifact.name}</h2>
+            <img src="${artifact.image}" alt="${artifact.name}">
+            <p>${artifact.description}</p>
+            <p>${artifact.article}</p>
+            <button onclick="closeArtifactDetails()">Close</button>
+        `;
+        } else {
+        detailsContainer.innerHTML = `
+            <h2>${artifact.name}</h2>
+            <img src="${artifact.image}" alt="${artifact.name}">
+            <p>${artifact.description}</p>
+            <p>${artifact.article}</p>
+            <p>Sumber : <a href="${artifact.source}">${artifact.source}</a></p>
+            <button onclick="closeArtifactDetails()">Close</button>
+        `;
+        }
+        document.getElementById("main-container").style.display = "none";
+        detailsContainer.style.display = "block";
+    }
+
+    function closeArtifactDetails() {
+        document.getElementById("main-container").style.display = "block";
+        document.getElementById("artifact-details").style.display = "none";
+    }
+
+    function showAboutUs(){
+        const aboutus = document.getElementById("about-us");
+        document.getElementById("main-container").style.display = "none";
+        aboutus.style.display = "block";
+    }
+
+    function closeAboutUs() {
+        document.getElementById("main-container").style.display = "block";
+        document.getElementById("about-us").style.display = "none";
+    }
+
+    const sortType = document.getElementById("sort")
+    function sortAscending(){
+        sortType.value = "ascending"
+    }
+    function sortDescending(){
+        sortType.value = "descending"
+    }
+</script>
