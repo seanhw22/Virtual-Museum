@@ -121,7 +121,7 @@ app.post('/search', async(req, res) => {
     }
     let q = req.body.searchInput;
     let artifactData = null;
-    let qry = {name:{$regex:'^' + q, $options:'i'}};
+    let qry = {name:{$regex: q, $options:'i'}};
     let message = '';
   
     if (q != null) {
@@ -238,7 +238,7 @@ app.post('/q', checkAdmin, async(req, res) => {
     const artifactResult = (await Artifact.find().lean());
     let q = req.body.searchInput;
     let artifactData = null;
-    let qry = {name:{$regex:'^' + q, $options:'i'}};
+    let qry = {name:{$regex: q, $options:'i'}};
     let message = '';
   
     if (q != null) {
@@ -285,7 +285,7 @@ app.post('/quiz-search', checkAdmin, async(req, res) => {
     const quizResult = (await Quiz.find().lean());
     let q = req.body.searchInput;
     let quizData = null;
-    let qry = {question:{$regex:'^' + q, $options:'i'}};
+    let qry = {question:{$regex: q, $options:'i'}};
     let message = '';
   
     if (q != null) {
@@ -325,7 +325,7 @@ app.post('/user-search', checkAdmin, async(req, res) => {
     const userResult = (await User.find().lean());
     let q = req.body.searchInput;
     let userData = null;
-    let qry = {username:{$regex:'^' + q, $options:'i'}};
+    let qry = {username:{$regex: q, $options:'i'}};
     let message = '';
     let currentUserData = req.user.username;
   
