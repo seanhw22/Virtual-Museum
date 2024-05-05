@@ -52,7 +52,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-const initializePassport = require('./passport-config');
+const initializePassport = require('./routes/passport-config.js');
 
 initializePassport(
     passport,
