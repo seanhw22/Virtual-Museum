@@ -21,11 +21,13 @@
 </center>
 <% if (data != null) { data.forEach( item => { %>
   <% if (item.username != current) { %>
-    <p>Username : <%= item.username %></p>
-    <p>Email : <%= item.email %></p>
-    <p>Admin : <%= item.admin %></p>
-    <a href="/user/<%= item._id %>">Edit admin priviliges</a> &nbsp; 
-    <a href="/user/delete/<%= item._id %>" class="red" onclick="return confirm('Are you sure you wish to delete this account?');">Delete account</a>
+    <div class="user-info">
+      <p>Username : <%= item.username %></p>
+      <p>Email : <%= item.email %></p>
+      <p>Admin : <%= item.admin %></p>
+      <a href="/user/<%= item._id %>">Edit admin priviliges</a> &nbsp; 
+      <a href="/user/delete/<%= item._id %>" class="red" onclick="return confirm('Are you sure you wish to delete this account?');">Delete account</a>
+    </div>
     <br><br>
 <% }}); } %>
 <br><br><br>

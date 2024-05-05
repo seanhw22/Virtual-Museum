@@ -376,3 +376,15 @@ p {
     border-radius: 8px;
     /* Applied border-radius to all corners */
 }
+
+.user-info {
+    align-self: center;
+    margin: auto;
+    width: 15%;
+    padding: 20px;
+    /* Increased padding for consistency */
+    background-color: #f8f9fa;
+    /* Changed background color to match global background */
+    border-radius: 8px;
+    /* Applied border-radius to all corners */
+}
