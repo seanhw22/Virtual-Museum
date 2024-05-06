@@ -1,0 +1,370 @@
+[{
+  "_id": {
+    "$oid": "66367ca323762e0645779a23"
+  },
+  "question": "Where was the tomb of the Jewish high priest Caiaphas discovered?",
+  "answers": [
+    {
+      "text": "Jerusalem",
+      "correct": true,
+      "_id": {
+        "$oid": "66367cba23762e0645779a35"
+      }
+    },
+    {
+      "text": "Bethsaida",
+      "correct": false,
+      "_id": {
+        "$oid": "66367cba23762e0645779a36"
+      }
+    },
+    {
+      "text": "Nazareth",
+      "correct": false,
+      "_id": {
+        "$oid": "66367cba23762e0645779a37"
+      }
+    },
+    {
+      "text": "Dalmanutha",
+      "correct": false,
+      "_id": {
+        "$oid": "66367cba23762e0645779a38"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367cdd23762e0645779a4c"
+  },
+  "question": "What inscription was found on the ossuary of Caiaphas?",
+  "answers": [
+    {
+      "text": "\"Joseph, son of David\"",
+      "correct": false,
+      "_id": {
+        "$oid": "66367cdd23762e0645779a4d"
+      }
+    },
+    {
+      "text": "\"Joseph, son of Caiaphas\"",
+      "correct": true,
+      "_id": {
+        "$oid": "66367cdd23762e0645779a4e"
+      }
+    },
+    {
+      "text": "\"Jesus, son of Joseph\"",
+      "correct": false,
+      "_id": {
+        "$oid": "66367cdd23762e0645779a4f"
+      }
+    },
+    {
+      "text": "\"John, son of Zebedee\"",
+      "correct": false,
+      "_id": {
+        "$oid": "66367cdd23762e0645779a50"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367d3823762e0645779a59"
+  },
+  "question": "What title did Pontius Pilate hold according to the stone slab dedication?",
+  "answers": [
+    {
+      "text": "Prefect of Judea",
+      "correct": true,
+      "_id": {
+        "$oid": "66367d3823762e0645779a5a"
+      }
+    },
+    {
+      "text": "Governor of Rome",
+      "correct": false,
+      "_id": {
+        "$oid": "66367d3823762e0645779a5b"
+      }
+    },
+    {
+      "text": "Emperor of Jerusalem",
+      "correct": false,
+      "_id": {
+        "$oid": "66367d3823762e0645779a5c"
+      }
+    },
+    {
+      "text": "King of Israel",
+      "correct": false,
+      "_id": {
+        "$oid": "66367d3823762e0645779a5d"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367d8223762e0645779a86"
+  },
+  "question": "Where was Jesus's death sentence set in a trial?",
+  "answers": [
+    {
+      "text": "Herod's Palace",
+      "correct": true,
+      "_id": {
+        "$oid": "66367d8223762e0645779a87"
+      }
+    },
+    {
+      "text": " Caiaphas's Tomb",
+      "correct": false,
+      "_id": {
+        "$oid": "66367d8223762e0645779a88"
+      }
+    },
+    {
+      "text": "Pontius Pilate's Mansion",
+      "correct": false,
+      "_id": {
+        "$oid": "66367d8223762e0645779a89"
+      }
+    },
+    {
+      "text": "Temple Mount",
+      "correct": false,
+      "_id": {
+        "$oid": "66367d8223762e0645779a8a"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367daa23762e0645779a94"
+  },
+  "question": "What was the profession of the people living in the town of Dalmanutha?",
+  "answers": [
+    {
+      "text": "Farmers",
+      "correct": false,
+      "_id": {
+        "$oid": "66367daa23762e0645779a95"
+      }
+    },
+    {
+      "text": "Fishermen",
+      "correct": true,
+      "_id": {
+        "$oid": "66367daa23762e0645779a96"
+      }
+    },
+    {
+      "text": "Merchants",
+      "correct": false,
+      "_id": {
+        "$oid": "66367daa23762e0645779a97"
+      }
+    },
+    {
+      "text": "Craftsmen",
+      "correct": false,
+      "_id": {
+        "$oid": "66367daa23762e0645779a98"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367dca23762e0645779aa2"
+  },
+  "question": "In which town did archaeologists find a temple dedicated to the Roman gods?",
+  "answers": [
+    {
+      "text": "Bethsaida",
+      "correct": true,
+      "_id": {
+        "$oid": "66367dca23762e0645779aa3"
+      }
+    },
+    {
+      "text": "Nazareth",
+      "correct": false,
+      "_id": {
+        "$oid": "66367dca23762e0645779aa4"
+      }
+    },
+    {
+      "text": "Magdala",
+      "correct": false,
+      "_id": {
+        "$oid": "66367dca23762e0645779aa5"
+      }
+    },
+    {
+      "text": "Dalmanutha",
+      "correct": false,
+      "_id": {
+        "$oid": "66367dca23762e0645779aa6"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367de223762e0645779aaf"
+  },
+  "question": "Where was the synagogue from Jesus's time discovered?",
+  "answers": [
+    {
+      "text": "Bethsaida",
+      "correct": false,
+      "_id": {
+        "$oid": "66367de223762e0645779ab0"
+      }
+    },
+    {
+      "text": "Nazareth",
+      "correct": false,
+      "_id": {
+        "$oid": "66367de223762e0645779ab1"
+      }
+    },
+    {
+      "text": "Magdala",
+      "correct": true,
+      "_id": {
+        "$oid": "66367de223762e0645779ab2"
+      }
+    },
+    {
+      "text": "Jerusalem",
+      "correct": false,
+      "_id": {
+        "$oid": "66367de223762e0645779ab3"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367e0123762e0645779abc"
+  },
+  "question": "Whose ossuary inscription includes \"brother of Jesus\"?",
+  "answers": [
+    {
+      "text": "Joseph",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e0123762e0645779abd"
+      }
+    },
+    {
+      "text": "Simon",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e0123762e0645779abe"
+      }
+    },
+    {
+      "text": "Judas",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e0123762e0645779abf"
+      }
+    },
+    {
+      "text": "James",
+      "correct": true,
+      "_id": {
+        "$oid": "66367e0123762e0645779ac0"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367e1923762e0645779ac9"
+  },
+  "question": "What material were the homes in Nazareth primarily made of?",
+  "answers": [
+    {
+      "text": "Wood",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e1923762e0645779aca"
+      }
+    },
+    {
+      "text": "Stone",
+      "correct": true,
+      "_id": {
+        "$oid": "66367e1923762e0645779acb"
+      }
+    },
+    {
+      "text": "Brick",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e1923762e0645779acc"
+      }
+    },
+    {
+      "text": "Mud",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e1923762e0645779acd"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66367e3123762e0645779ad6"
+  },
+  "question": "What era turned one house in Nazareth into a shrine believed to be Jesus's childhood home?",
+  "answers": [
+    {
+      "text": "Roman",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e3123762e0645779ad7"
+      }
+    },
+    {
+      "text": "Byzantine",
+      "correct": true,
+      "_id": {
+        "$oid": "66367e3123762e0645779ad8"
+      }
+    },
+    {
+      "text": "Greek",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e3123762e0645779ad9"
+      }
+    },
+    {
+      "text": "Persian",
+      "correct": false,
+      "_id": {
+        "$oid": "66367e3123762e0645779ada"
+      }
+    }
+  ],
+  "__v": 0
+}]
